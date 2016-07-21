@@ -109,7 +109,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "com.cd.sis.bean.Usuario[ id=" + id + " ]";
+        return this.nome;
     }
     
 }

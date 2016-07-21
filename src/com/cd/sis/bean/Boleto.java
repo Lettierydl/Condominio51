@@ -5,7 +5,10 @@
  */
 package com.cd.sis.bean;
 
+import com.cd.util.OperacaoStringUtil;
+import com.cd.util.VariaveisDeConfiguracaoUtil;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Objects;
 import javax.persistence.Basic;
@@ -17,13 +20,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.joda.time.Days;
 
 /**
  *
@@ -32,21 +33,22 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "boleto")
 @XmlRootElement
-public class Boleto  implements Serializable {
-  private static final long serialVersionUID = 1L;
+public class Boleto implements Serializable, Comparable<Boleto> {
+
+    private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "id")
     private Integer id;
-    
+
     @Column(name = "mes_referencia")
     @Temporal(TemporalType.DATE)
     private Date mesReferencia;
-    
+
     @Column(name = "pago")
     private boolean pago;
-    
+
     @Column(name = "data_pago")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataPago;
@@ -57,20 +59,21 @@ public class Boleto  implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(precision = 22)
     private double taxa;
-    
+
     @Lob
     private byte[] arquivo;
-    
+
+    @Column(name = "nomeAquivo")
+    private String nomeAquivo;
+
     @JoinColumn(name = "id_condominio", referencedColumnName = "id")
     @ManyToOne
     private Condominio condominio;
-    
-    
+
     @JoinColumn(name = "id_morador", referencedColumnName = "id")
     @ManyToOne
     private Morador idMorador;
-    
-    
+
     public Boleto() {
     }
 
@@ -114,6 +117,14 @@ public class Boleto  implements Serializable {
         this.arquivo = arquivo;
     }
 
+    public String getNomeAquivo() {
+        return nomeAquivo;
+    }
+
+    public void setNomeAquivo(String nomeAquivo) {
+        this.nomeAquivo = nomeAquivo;
+    }
+
     public Condominio getCondominio() {
         return condominio;
     }
@@ -146,6 +157,47 @@ public class Boleto  implements Serializable {
         this.valorPago = valorPago;
     }
 
+    public double getJuros() {
+        int diaDoVencimento = condominio.getDiaDoVencimento();
+        Calendar hoje = Calendar.getInstance();
+        Calendar vencimento = Calendar.getInstance();
+        vencimento.setTime(mesReferencia);
+        vencimento.set(Calendar.DAY_OF_MONTH, diaDoVencimento);
+       
+        if (isPago() || vencimento.after(hoje) ) {
+            return 0;
+        }
+        vencimento.setTime(mesReferencia);
+        vencimento.set(Calendar.DAY_OF_MONTH, diaDoVencimento);
+        long DAY = 24L * 60L * 60L * 1000L;
+        int diferenca = (int) ((hoje.getTime().getTime() - vencimento.getTime().getTime() ) / DAY);
+        diferenca = (diferenca < 0 ? 0 : diferenca);
+        return (taxa
+                * VariaveisDeConfiguracaoUtil.PORCENTAGEM_JUROS_AO_DIA)
+                * diferenca;
+    }
+
+    public double getMulta() {
+        int diaDoVencimento = condominio.getDiaDoVencimento();
+        Calendar hoje = Calendar.getInstance();
+        Calendar vencimento = Calendar.getInstance();
+        vencimento.setTime(mesReferencia);
+        vencimento.set(Calendar.DAY_OF_MONTH, diaDoVencimento);
+        
+        if (isPago() || vencimento.after(hoje)) {
+            return 0;
+        }
+        return condominio.getTaxaCondominial()
+                * VariaveisDeConfiguracaoUtil.PORCENTAGEM_MULTA;
+
+    }
+
+    public double getTotalAPagar() {
+        if (isPago()) {
+            return 0;
+        }
+        return taxa + getJuros() + getMulta();
+    }
 
     @Override
     public String toString() {
@@ -176,13 +228,17 @@ public class Boleto  implements Serializable {
         }
         return true;
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
+
+    @Override
+    public int compareTo(Boleto o) {
+        return o.getMesReferencia().compareTo(mesReferencia);
+    }
+
+    public String getStatus() {
+        if (isPago()) {
+            return "Pago";
+        } else {
+            return "Em Aberto";
+        }
+    }
 }

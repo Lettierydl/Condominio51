@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="1024.0" style="-fx-background-color: rgb(60, 171, 198);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cd.ui.controller.RelatoriosController">
+    <stylesheets>
+        <URL value="@/com/cd/ui/css/main.css" />
+    </stylesheets>
+   <children>
+      <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Condomínio:" />
+      <ComboBox fx:id="box_condominio" layoutX="100.0" layoutY="10.0" onAction="#condiminioSelecionado" prefHeight="27.0" prefWidth="284.0">
+         <tooltip>
+            <Tooltip text="Conomírio referênte ao Boletos" />
+         </tooltip></ComboBox>
+      <TabPane fx:id="tabPane" layoutY="47.0" prefHeight="500.0" prefWidth="1029.0" tabClosingPolicy="UNAVAILABLE">
+         <tabs>
+            <Tab text="Cadastros">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <GridPane layoutX="15.0" layoutY="15.0" prefHeight="98.0" prefWidth="599.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Unidade:">
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
+                              </Text>
+                              <ComboBox fx:id="cUnidade" prefHeight="27.0" prefWidth="190.0" GridPane.columnIndex="1">
+                                 <tooltip>
+                                    <Tooltip text="Unidade" />
+                                 </tooltip>
+                              </ComboBox>
+                              <Button mnemonicParsing="false" onAction="#gerarPDFCadastros" text="Gerar PDF" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <tooltip>
+                                    <Tooltip text="Gera Relatório e Salvar em PDF" />
+                                 </tooltip>
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                              </Button>
+                              <Button mnemonicParsing="false" onAction="#enviarRelatorioCadastroPorEmail" text="Enviar Emails" GridPane.columnIndex="2" GridPane.rowIndex="2">
+                                 <tooltip>
+                                    <Tooltip text="Enviar Relatório Por email" />
+                                 </tooltip>
+                                 <GridPane.margin>
+                                    <Insets left="150.0" />
+                                 </GridPane.margin>
+                              </Button>
+                              <CheckBox fx:id="cIncluirMoradores" mnemonicParsing="false" text="Apenas Condomínio" GridPane.columnIndex="2">
+                                 <GridPane.margin>
+                                    <Insets left="30.0" />
+                                 </GridPane.margin>
+                                 <tooltip>
+                                    <Tooltip text="Relatório sem Conôminos (Apenas Condomínio)" />
+                                 </tooltip>
+                              </CheckBox>
+                           </children>
+                           <columnConstraints>
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="199.0" minWidth="10.0" prefWidth="172.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="295.0" minWidth="10.0" prefWidth="226.0" />
+                           </columnConstraints>
+                           <rowConstraints>
+                              <RowConstraints maxHeight="71.0" minHeight="10.0" prefHeight="45.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="94.0" minHeight="8.0" prefHeight="8.0" vgrow="SOMETIMES" />
+                              <RowConstraints maxHeight="94.0" minHeight="10.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                           </rowConstraints>
+                        </GridPane>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </Tab>
+         </tabs>
+      </TabPane>
+   </children>
+   
+</AnchorPane>

@@ -3,7 +3,14 @@ package com.cd.util;
 import javafx.util.Duration;
 
 public class VariaveisDeConfiguracaoUtil {
-
+        
+        public static final String CAMINHO_ARQUIVO_PADRAO_CONDOMINIO = "\\\\Servidor\\disco externo e\\CONDOMINIO- SEVERINO\\<COND_NOME>";
+        public static final String CAMINHO_ARQUIVO_PADRAO_BOLETOS_MES = "\\\\Servidor\\disco externo e\\CONDOMINIO- SEVERINO\\<COND_NOME>";
+        
+        public static final double PORCENTAGEM_JUROS_AO_DIA = 0.01;
+        public static final double PORCENTAGEM_MULTA = 0.02;
+        
+    
 	public static final boolean LIBERAR_VENDA_DE_PRODUTO_SEM_ESTOQUE = true;
 	
 	public static final boolean ATIVAR_DESCONTO_DE_PROMOCOES = true;

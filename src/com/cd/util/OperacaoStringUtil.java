@@ -9,12 +9,19 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.DecimalFormat;
+import java.text.Normalizer;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class OperacaoStringUtil {
-
+    
+    public static final String REGEX_CPF = "\\d{3}.\\d{3}.\\d{3}-\\d{2}";
+    public static final String REGEX_VALOR_MOEDA = ".R\\$(\\d{1,3}(\\.\\d{3})*|\\d+)(\\,\\d{2})";
+    
     public static final boolean LIBERAR_VENDA_DE_PRODUTO_SEM_ESTOQUE = true;
 
     public static final boolean ATIVAR_DESCONTO_DE_PROMOCOES = true;
@@ -37,6 +44,14 @@ public class OperacaoStringUtil {
                 .replace(",", "."));
     }
 
+    public static int converterStringValorInt(String valor) {
+        if (valor.isEmpty()) {
+            return 0;
+        }
+        return Integer.valueOf(valor.replace(".", "").replace(" ", "")
+                .replace(",", "."));
+    }
+
     public static Calendar converterDataTimeValor(String valor) {
         Calendar c = Calendar.getInstance();
         try {
@@ -47,8 +62,20 @@ public class OperacaoStringUtil {
         return c;
     }
 
+    public static String formatDataMesValor(Calendar c) {
+        return new SimpleDateFormat("MM/yyyy").format(c.getTime());
+    }
+
+    public static String formatDataMesValor(Date c) {
+        return new SimpleDateFormat("MM/yyyy").format(c);
+    }
+
     public static String formatDataTimeValor(Calendar c) {
         return new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss").format(c.getTime());
+    }
+
+    public static String formatDataTimeValor(Date c) {
+        return new SimpleDateFormat("dd/MM/yyyy  HH:mm:ss").format(c);
     }
 
     public static String formatHoraMinutoSegunda(Calendar c) {
@@ -67,6 +94,10 @@ public class OperacaoStringUtil {
 
     public static String formatDataValor(Calendar c) {
         return new SimpleDateFormat("dd/MM/yyyy").format(c.getTime());
+    }
+
+    public static String formatDataValor(Date c) {
+        return new SimpleDateFormat("dd/MM/yyyy").format(c);
     }
 
     public static String formatarStringQuantidade(double quantidade) {
@@ -129,13 +160,43 @@ public class OperacaoStringUtil {
                 + "-" + telefone.substring(6);
     }
 
+    public static String formatarStringParaConta(String conta) {
+        if (conta == null || conta.isEmpty()) {
+            return "";
+        }
+        String value = conta.replaceAll("[^0-9]", "");
+        value = value.replaceFirst("(\\d{2})(\\d)", "$1.$2");
+        value = value.replaceFirst("(\\d{3})(\\d)", "$1-$2");
+        return value;
+    }
+
+    public static String formatarStringParaAgencia(String agencia) {
+        if (agencia == null || agencia.isEmpty()) {
+            return "";
+        }
+        String value = agencia.replaceAll("[^0-9]", "");
+        value = value.replaceFirst("(\\d{4})(\\d)", "$1-$2");
+        return value;
+    }
+
     public static String retirarMascaraDeCPF(String cpf) {
         return cpf.replace(".", "").replace("-", "");
+    }
+
+    public static String retirarMascaraDeCNPJ(String cpf) {
+        return cpf.replace(".", "").replace("-", "").replace("/", "");
     }
 
     public static String retirarMascaraDeTelefone(String telefone) {
         return (telefone == null || telefone.isEmpty()) ? "" : telefone
                 .replace("(", "").replace(")", "").replace("-", "");
+    }
+
+    public static String retirarMascaras(String agencia) {
+        return (agencia == null || agencia.isEmpty()) ? "" : agencia
+                .replace("(", "").replace(")", "").replace("-", "")
+                .replace(".", "").replace(",", "").replace("*", "")
+                .replace("/", "").replace("\\", "");
     }
 
     public static String formatarStringParaMascaraDeCPF(String cpf) {
@@ -144,13 +205,19 @@ public class OperacaoStringUtil {
                 + cpf.substring(9);
     }
 
+    public static String formatarStringParaMascaraDeCNPJ(String cnpj) {
+        return cnpj == null || cnpj.isEmpty() ? "" : cnpj.substring(0, 2) + "."
+                + cnpj.substring(2, 5) + "." + cnpj.substring(5, 8) + "/"
+                + cnpj.substring(8, 12) + "-" + cnpj.substring(12);
+    }
+
     public static String criptografar(String string) {
         StringBuffer sb = new StringBuffer(string);
         sb.reverse();
         return sb.toString();
     }
-    
-    public static String criptografar18(String in){
+
+    public static String criptografar18(String in) {
         StringBuffer tempReturn = new StringBuffer();
 
         for (int i = 0; i < in.length(); i++) {
@@ -164,8 +231,7 @@ public class OperacaoStringUtil {
         return tempReturn.toString();
     }
 
-
-public static boolean validarSenhaMestre(String senha, boolean criptografar) {
+    public static boolean validarSenhaMestre(String senha, boolean criptografar) {
         String senha_cript = senha;
         if (criptografar) {
             // criptografar md5 e colocar em senha_cript
@@ -186,6 +252,27 @@ public static boolean validarSenhaMestre(String senha, boolean criptografar) {
         }
 
         return senha_cript.equals("4f02a2f9d2fd686bd865990e8f1838a3");
+    }
+
+    public static String removerAcentos(String label) {
+        return Normalizer.normalize(label, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
+    }
+    
+    public static String regex(String regex, String text){
+        if (text == null || regex == null || regex.isEmpty() || text.isEmpty()) {
+            return "";
+        }
+
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(text);
+
+        String encontrados = "";
+
+        while (matcher.find()) {
+            encontrados += matcher.group() + "\n";
+        }
+        // Removendo o último espaço
+        return encontrados.trim();
     }
 
 }

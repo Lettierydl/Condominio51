@@ -8,6 +8,8 @@ package com.cd.util;
 import java.math.BigDecimal;
 import java.text.NumberFormat;
 import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -21,6 +23,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.util.StringConverter;
 
 /**
  *
@@ -67,6 +70,24 @@ public abstract class MaskFieldUtil {
                 value = value.replaceAll("[^0-9]", "");
                 value = value.replaceFirst("(\\d{2})(\\d)", "$1/$2");
                 value = value.replaceFirst("(\\d{2})\\/(\\d{2})(\\d)", "$1/$2/$3");
+                textField.setText(value);
+            }
+        });
+    }
+    
+    public static void diaField(final TextField textField) {
+        MaskFieldUtil.maxField(textField, 10);
+        textField.textProperty().addListener((ov, oldValue, newValue) -> {
+            if (newValue != null && !newValue.isEmpty()) {
+                MaskFieldUtil.positionCaret(textField);
+                String value = textField.getText();
+                value = value.replaceAll("[^0-9]", "");
+                int dia = Integer.valueOf(value);
+                if(dia > 31){
+                    value = "31";
+                }else if(dia < 1){
+                    value = "1";
+                }
                 textField.setText(value);
             }
         });
@@ -243,6 +264,35 @@ public abstract class MaskFieldUtil {
         });
     }
 
+    public static void agenciaField(TextField textField) {
+        MaskFieldUtil.maxField(textField, 6);
+        textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent e) {
+                String value = textField.getText();
+                value = value.replaceAll("[^0-9]", "");
+                value = value.replaceFirst("(\\d{4})(\\d)", "$1-$2");
+                textField.setText(value);
+                MaskFieldUtil.positionCaret(textField);
+            }
+        });
+    }
+
+    public static void contaField(TextField textField) {
+        MaskFieldUtil.maxField(textField, 8);
+        textField.setOnKeyReleased(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent e) {
+                String value = textField.getText();
+                value = value.replaceAll("[^0-9]", "");
+                value = value.replaceFirst("(\\d{2})(\\d)", "$1.$2");
+                value = value.replaceFirst("(\\d{3})(\\d)", "$1-$2");
+                textField.setText(value);
+                MaskFieldUtil.positionCaret(textField);
+            }
+        });
+    }
+    
     public static void upperCase(TextField campo) {
         campo.textProperty().addListener((ov, oldValue, newValue) -> {
             if (newValue != null && !newValue.isEmpty()) {
@@ -285,9 +335,36 @@ public abstract class MaskFieldUtil {
         }
         return result.replaceAll("[^0-9]", "");
     }
+    
+    public static StringConverter converterDataMes() {
+        StringConverter converter = new StringConverter<LocalDate>() {
+            DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM/yyyy");
+
+            @Override
+            public String toString(LocalDate date) {
+                if (date != null) {
+                    return dateFormatter.format(date);
+                } else {
+                    return "";
+                }
+            }
+
+            @Override
+            public LocalDate fromString(String string) {
+                if (string != null && !string.isEmpty()) {
+                    return LocalDate.parse(string, dateFormatter);
+                } else {
+                    return null;
+                }
+            }
+        };
+        return converter;
+    }
 
     static {
         Collections.addAll(ignoreKeyCodes, new KeyCode[]{KeyCode.F1, KeyCode.F2, KeyCode.F3, KeyCode.F4, KeyCode.F5, KeyCode.F6, KeyCode.F7, KeyCode.F8, KeyCode.F9, KeyCode.F10, KeyCode.F11, KeyCode.F12});
     }
+
+    
 
 }

@@ -37,7 +37,7 @@ public class ControllerTelas {
         stage.setScene(scene);
         stage.show();
         
-        stage.getIcons().add(new javafx.scene.image.Image(IMG.class.getResource("logo_relatorio.png").openStream()));
+        stage.getIcons().add(new javafx.scene.image.Image(IMG.class.getResource("logo.png").openStream()));
         stage.setTitle("Condominío 51");
 
         switch (tela) {

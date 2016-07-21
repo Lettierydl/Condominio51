@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane prefHeight="460.0" prefWidth="680.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cd.ui.controller.dialog.BoletosCriadosController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="138.0" minHeight="10.0" prefHeight="81.15159606933594" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="394.0" minHeight="10.0" prefHeight="331.84840393066406" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="111.0" minHeight="10.0" prefHeight="47.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="321.0" prefWidth="600.0" GridPane.rowIndex="1">
+         <children>
+            <TableView fx:id="table" layoutX="6.0" layoutY="14.0" prefHeight="282.0" prefWidth="663.0">
+              <columns>
+                  <TableColumn fx:id="colUnidade" prefWidth="83.0" text="Unidade" />
+                  <TableColumn fx:id="colMorador" prefWidth="127.0" text="Condômino" />
+                <TableColumn fx:id="colMes" prefWidth="65.0" text="Mês" />
+                <TableColumn fx:id="colTaxa" prefWidth="67.0" text="Taxa" />
+                  <TableColumn fx:id="colArquivo" prefWidth="246.0" text="Arquivo" />
+                  <TableColumn fx:id="colExcuir" prefWidth="70.0" text="Excluir" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="2">
+         <children>
+            <Pane prefHeight="47.0" prefWidth="489.0" />
+            <Button fx:id="okButton" minWidth="80.0" mnemonicParsing="false" onAction="#okClicado" text="Salvar" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Registrar Boletos" />
+               </tooltip>
+            </Button>
+            <Button fx:id="cancelButton" cancelButton="true" minWidth="80.0" mnemonicParsing="false" onAction="#cancelarClicado" text="Desfazer" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets left="20.0" top="10.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Não Registrar Boletos" />
+               </tooltip>
+            </Button>
+         </children>
+      </HBox>
+      <Pane prefHeight="73.0" prefWidth="680.0">
+         <children>
+            <Text layoutX="13.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Boletos Criados">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+   </children>
+</GridPane>

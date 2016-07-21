@@ -5,7 +5,9 @@
  */
 package com.cd.sis.bean;
 
+import com.cd.util.OperacaoStringUtil;
 import java.io.Serializable;
+import java.util.Calendar;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -106,11 +108,11 @@ public class Condominio implements Serializable {
     }
 
     public String getCnpj() {
-        return cnpj;
+        return OperacaoStringUtil.formatarStringParaMascaraDeCNPJ(cnpj);
     }
 
     public void setCnpj(String cnpj) {
-        this.cnpj = cnpj;
+        this.cnpj = OperacaoStringUtil.retirarMascaraDeCNPJ(cnpj);
     }
 
     public String getNome() {
@@ -130,19 +132,19 @@ public class Condominio implements Serializable {
     }
 
     public String getAgencia() {
-        return agencia;
+        return OperacaoStringUtil.formatarStringParaAgencia(agencia);
     }
 
     public void setAgencia(String agencia) {
-        this.agencia = agencia;
+        this.agencia = OperacaoStringUtil.retirarMascaras(agencia);
     }
 
     public String getConta() {
-        return conta;
+        return OperacaoStringUtil.formatarStringParaConta(conta);
     }
 
     public void setConta(String conta) {
-        this.conta = conta;
+        this.conta = OperacaoStringUtil.retirarMascaras(conta);
     }
 
     public String getBanco() {
@@ -176,7 +178,11 @@ public class Condominio implements Serializable {
     public void setUnidades(int unidades) {
         this.unidades = unidades;
     }
-
+    
+    public int getUnidadesPagaveis(){
+        return unidades - 1;
+    }
+    
     @XmlTransient
     public List<Morador> getMoradorList() {
         return moradorList;
@@ -193,8 +199,8 @@ public class Condominio implements Serializable {
     public void setSindico(Morador idSindico) {
         this.idSindico = idSindico;
     }
-
-
+   
+    
     @Override
     public int hashCode() {
         int hash = 0;
@@ -217,7 +223,13 @@ public class Condominio implements Serializable {
 
     @Override
     public String toString() {
-        return "com.cd.sis.bean.Condominio[ id=" + id + " ]";
+        return this.nome;
+    }
+
+    public String getTituloDocumento() {
+        return "Condomínio " + nome+"\n"
+                +"CNPJ " + getCnpj() + "\n"
+                +endereco+"\n";
     }
     
 }

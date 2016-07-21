@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<GridPane prefHeight="587.0" prefWidth="714.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cd.ui.controller.dialog.EmailsController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="138.0" minHeight="10.0" prefHeight="64.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="439.0" minHeight="10.0" prefHeight="276.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="439.0" minHeight="10.0" prefHeight="69.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="439.0" minHeight="10.0" prefHeight="193.0" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="239.0" minHeight="10.0" prefHeight="75.0" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <AnchorPane id="AnchorPane" prefHeight="321.0" prefWidth="600.0" GridPane.rowIndex="1">
+         <children>
+            <TableView fx:id="table" layoutX="6.0" layoutY="14.0" prefHeight="251.0" prefWidth="701.0" AnchorPane.leftAnchor="6.0" AnchorPane.rightAnchor="6.0" AnchorPane.topAnchor="14.0">
+              <columns>
+                  <TableColumn fx:id="colUnidade" prefWidth="66.0" text="Unidade" />
+                  <TableColumn fx:id="colMorador" prefWidth="241.7130889892578" text="Condômino" />
+                  <TableColumn fx:id="colEmail" prefWidth="270.286865234375" text="Email" />
+                  <TableColumn fx:id="colNaoEnviar" minWidth="0.0" prefWidth="118.80523681640625" text="Não Enviar" />
+              </columns>
+            </TableView>
+         </children>
+      </AnchorPane>
+      <HBox prefHeight="100.0" prefWidth="200.0" GridPane.rowIndex="4">
+         <children>
+            <Pane prefHeight="57.0" prefWidth="524.0" />
+            <Button fx:id="okButton" minWidth="80.0" mnemonicParsing="false" onAction="#okClicado" text="Enviar" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets top="10.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Enviar emails" />
+               </tooltip>
+            </Button>
+            <Button fx:id="cancelButton" cancelButton="true" minWidth="80.0" mnemonicParsing="false" onAction="#cancelarClicado" text="Desfazer" HBox.hgrow="NEVER">
+               <HBox.margin>
+                  <Insets left="20.0" top="10.0" />
+               </HBox.margin>
+               <tooltip>
+                  <Tooltip text="Não Enviar Emails" />
+               </tooltip>
+            </Button>
+         </children>
+      </HBox>
+      <Pane prefHeight="67.0" prefWidth="617.0">
+         <children>
+            <Text layoutX="14.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Envio de Emails">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Text>
+         </children>
+      </Pane>
+      <FlowPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
+         <children>
+            <TextArea fx:id="email" prefHeight="167.0" prefWidth="501.0" promptText="email">
+               <FlowPane.margin>
+                  <Insets left="5.0" />
+               </FlowPane.margin>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+               <tooltip>
+                  <Tooltip text="Email padrão com tags" />
+               </tooltip>
+            </TextArea>
+            <Pane prefHeight="167.0" prefWidth="199.0">
+               <children>
+                  <Button layoutX="61.0" layoutY="2.0" minWidth="80.0" mnemonicParsing="false" onAction="#anexarArquivo" text="Anexo">
+                     <tooltip>
+                        <Tooltip text="Anexar Arquivos ao Email" />
+                     </tooltip>
+                  </Button>
+                  <ListView fx:id="listAnexos" layoutX="11.0" layoutY="33.0" prefHeight="133.0" prefWidth="186.0" />
+               </children>
+            </Pane>
+         </children>
+      </FlowPane>
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Texto Padrão" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="20.0" top="5.0" />
+         </GridPane.margin>
+         <font>
+            <Font size="29.0" />
+         </font>
+      </Text>
+      <ComboBox fx:id="assunto_box" onAction="#modificarTextoEmail" prefHeight="27.0" prefWidth="245.0" GridPane.rowIndex="2">
+         <GridPane.margin>
+            <Insets left="260.0" top="10.0" />
+         </GridPane.margin>
+         <tooltip>
+            <Tooltip text="Texto do email padrão" />
+         </tooltip>
+      </ComboBox>
+   </children>
+</GridPane>

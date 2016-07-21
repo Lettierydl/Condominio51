@@ -9,6 +9,7 @@ import com.cd.sis.controller.find.FindMorador;
 import com.cd.sis.bean.*;
 import com.cd.sis.controller.*;
 import com.cd.sis.controller.find.FindBoleto;
+import java.util.List;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -79,8 +80,9 @@ public class FinanceiroControllerTest {
         System.out.println("criarBoletosMesAtual");
         int unidades = 20;
         Condominio cond = cadastrarCondominioEMoradores(unidades);
-        int boletos = bo.criarBoletosMesAtual(cond);
-        assertEquals(unidades-1, boletos);
+        List<Boleto> boletos = bo.criarBoletosMesAtual(cond);
+        bo.salvarBoletos(boletos);
+        assertEquals(unidades-1, boletos.size());
         assertEquals(unidades-1, FindBoleto.boletosDoCondominio(cond).size());
         assertEquals(unidades-1, FindBoleto.boletosNaoPagosDoCondominio(cond).size());   
     }

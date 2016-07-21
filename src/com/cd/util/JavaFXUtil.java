@@ -5,6 +5,11 @@
  */
 package com.cd.util;
 
+import com.cd.sis.bean.Condominio;
+import com.cd.sis.bean.Morador;
+import java.awt.Desktop;
+import java.io.File;
+import java.io.IOException;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -28,6 +33,12 @@ import javafx.scene.control.TextField;
  */
 public class JavaFXUtil {
 
+    
+    // serve para o sistema chamar o programa padrao que abre esse tipo de arquivo
+    public static void abrirArquivoDoSistema(File file) throws IOException{
+        Desktop.getDesktop().open(file);    
+    } 
+    
     public static void colunValueMoedaFormat(TableColumn colunaDouble) {
         colunaDouble.setCellFactory(col
                 -> new TableCell<Double, Number>() {
@@ -72,6 +83,66 @@ public class JavaFXUtil {
                     }
                 });
     }
+    public static void colunDataTimeFormatDate(TableColumn colunaDouble) {
+        colunaDouble.setCellFactory((Object col)
+                -> new TableCell<Date, Date>() {
+                    @Override
+                    public void updateItem(Date price, boolean empty) {
+                        super.updateItem(price, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            setText( OperacaoStringUtil.formatDataTimeValor(price) );
+                        }
+                    }
+                });
+    }
+    
+    public static void colunDataFormatDate(TableColumn colunaDouble) {
+        colunaDouble.setCellFactory((Object col)
+                -> new TableCell<Date, Date>() {
+                    @Override
+                    public void updateItem(Date price, boolean empty) {
+                        super.updateItem(price, empty);
+                        if (empty || price == null) {
+                            setText(null);
+                        } else {
+                            setText( OperacaoStringUtil.formatDataValor(price) );
+                        }
+                    }
+                });
+    }
+    
+    public static void colunDataMesFormat(TableColumn colunaDouble) {
+        colunaDouble.setCellFactory(col
+                -> new TableCell<Calendar, Calendar>() {
+                    @Override
+                    public void updateItem(Calendar price, boolean empty) {
+                        super.updateItem(price, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            setText(OperacaoStringUtil.formatDataMesValor(price));
+                        }
+                    }
+                });
+    }
+    
+    public static void colunDataMesFormatDate(TableColumn colunaDouble) {
+        colunaDouble.setCellFactory(col
+                -> new TableCell<Date, Date>() {
+                    @Override
+                    public void updateItem(Date price, boolean empty) {
+                        super.updateItem(price, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            setText(OperacaoStringUtil.formatDataMesValor(price));
+                        }
+                    }
+                });
+    }
+    
     
     public static void nextFielOnAction(TextField action, Node foccus){
         action.setOnAction(new EventHandler<ActionEvent>() {
@@ -121,5 +192,80 @@ public class JavaFXUtil {
         });
     }
 
+    public static void colunMoradorFormat(TableColumn colunaMorador) {
+        colunaMorador.setCellFactory(col
+                -> new TableCell<Morador, Morador>() {
+                    @Override
+                    public void updateItem(Morador price, boolean empty) {
+                        super.updateItem(price, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            try{
+                                setText(price.getNome());
+                            }catch(NullPointerException ne){
+                                setText(null);
+                            }
+                        }
+                    }
+                });
+    }
+    
+    public static void colunUnidadeMoradorFormat(TableColumn colunaMorador) {
+        colunaMorador.setCellFactory(col
+                -> new TableCell<Morador, Morador>() {
+                    @Override
+                    public void updateItem(Morador price, boolean empty) {
+                        super.updateItem(price, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            try{
+                                setText(price.getUnidade());
+                            }catch(NullPointerException ne){
+                                setText(null);
+                            }
+                        }
+                    }
+                });
+    }
+    
+    public static void colunCondominioFormat(TableColumn colunaCondominio) {
+        colunaCondominio.setCellFactory(col
+                -> new TableCell<Condominio, Condominio>() {
+                    @Override
+                    public void updateItem(Condominio price, boolean empty) {
+                        super.updateItem(price, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            try{
+                                setText(price.getNome());
+                            }catch(NullPointerException ne){
+                                setText(null);
+                            }
+                        }
+                    }
+                });
+    }
 
+    public static void colunEmailMoradorFormat(TableColumn colEmail) {
+        colEmail.setCellFactory(col
+                -> new TableCell<Morador, Morador>() {
+                    @Override
+                    public void updateItem(Morador price, boolean empty) {
+                        super.updateItem(price, empty);
+                        if (empty) {
+                            setText(null);
+                        } else {
+                            try{
+                                setText(price.getEmail());
+                            }catch(NullPointerException ne){
+                                setText(null);
+                            }
+                        }
+                    }
+                });
+    }
+    
 }

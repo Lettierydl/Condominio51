@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="1024.0" style="-fx-background-color: rgb(60, 171, 198);" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cd.ui.controller.ConfiguracoesController">
+    <stylesheets>
+        <URL value="@/com/cd/ui/css/main.css" />
+    </stylesheets>
+   <children>
+      <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Condomínio:" />
+      <ComboBox fx:id="box_condominio" layoutX="100.0" layoutY="10.0" onAction="#condiminioSelecionado" prefHeight="27.0" prefWidth="284.0">
+         <tooltip>
+            <Tooltip text="Conomírio referênte ao Boletos" />
+         </tooltip></ComboBox>
+      <Text layoutX="321.0" layoutY="230.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Em Contrução">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Text>
+   </children>
+   
+</AnchorPane>

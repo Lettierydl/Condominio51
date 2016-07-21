@@ -5,6 +5,7 @@
  */
 package com.cd.sis.bean;
 
+import com.cd.util.OperacaoStringUtil;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -34,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Morador.findByCpf", query = "SELECT m FROM Morador m WHERE m.cpf = :cpf"),
     @NamedQuery(name = "Morador.findByTelefone", query = "SELECT m FROM Morador m WHERE m.telefone = :telefone"),
     @NamedQuery(name = "Morador.findByEmail", query = "SELECT m FROM Morador m WHERE m.email = :email")})
-public class Morador implements Serializable {
+public class Morador implements Serializable, Comparable<Morador> {
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -70,6 +71,10 @@ public class Morador implements Serializable {
 
     public Morador(Integer id) {
         this.id = id;
+    }
+    
+    public Morador(String nome) {
+        this.nome = nome;
     }
 
     public Integer getId() {
@@ -150,7 +155,22 @@ public class Morador implements Serializable {
 
     @Override
     public String toString() {
-        return "com.cd.sis.bean.Morador[ id=" + id + " ]";
+        if(unidade != null && !unidade.isEmpty()){
+            return this.nome+" - "+unidade ;
+        }else{
+            return this.nome;
+        }
+    }
+
+    @Override
+    public int compareTo(Morador o) {
+        try{
+            int und = OperacaoStringUtil.converterStringValorInt(o.unidade);
+            int und2 = OperacaoStringUtil.converterStringValorInt(unidade);
+            return Integer.compare(und,und2);
+        }catch(Exception e){}
+        
+        return unidade.compareToIgnoreCase(o.unidade);
     }
 
     

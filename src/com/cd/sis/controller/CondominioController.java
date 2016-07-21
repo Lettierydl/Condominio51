@@ -16,6 +16,10 @@ import javax.persistence.EntityNotFoundException;
  */
 public class CondominioController extends ControllerEntity<Condominio>{
 
+    
+    
+    
+    
     @Override
     public void create(Condominio entity) throws Exception {
         try {

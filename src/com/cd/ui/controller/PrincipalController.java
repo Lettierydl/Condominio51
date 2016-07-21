@@ -6,6 +6,7 @@ package com.cd.ui.controller;
  * and open the template in the editor.
  */
 import com.cd.*;
+import com.cd.util.OperacaoStringUtil;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.application.Platform;
@@ -37,7 +38,7 @@ public class PrincipalController implements Initializable {
 
     @FXML
     private SplitMenuButton user;
-    
+
     @FXML
     private Label version_system;
 
@@ -58,15 +59,15 @@ public class PrincipalController implements Initializable {
         version_system.setText(Facede.version_system);
         adicionarAtalhos();
     }
-    
-    public void adicionarAtalhos(){
+
+    public void adicionarAtalhos() {
         home.addEventHandler(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
             if (t.isShiftDown() && t.getCode().equals(KeyCode.V)) {
                 Main.trocarDeTela(ControllerTelas.TELA_VENDA);
             }
         });
     }
-    
+
     @FXML
     public void irHome() {
         stack.getChildren().clear();
@@ -89,13 +90,10 @@ public class PrincipalController implements Initializable {
     public void botaoMenu(ActionEvent e) {
         Button bt = (Button) e.getSource();
         String label = (bt.getId() != null ? bt.getId() : bt.getText()).toLowerCase();
+        stack.getChildren().clear();
+        label = OperacaoStringUtil.removerAcentos(label);
+        stack.getChildren().add(getNode("fxml/" + label + ".fxml"));
 
-        if (label.equalsIgnoreCase("venda")) {
-            Main.trocarDeTela(ControllerTelas.TELA_VENDA);
-        } else {
-            stack.getChildren().clear();
-            stack.getChildren().add(getNode("fxml/" + label + ".fxml"));
-        }
     }
 
     private Node getNode(String node) {
@@ -103,6 +101,7 @@ public class PrincipalController implements Initializable {
         try {
             no = FXMLLoader.load(getClass().getResource(node));
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return no;
 

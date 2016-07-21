@@ -14,7 +14,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="768.0" prefWidth="1024.0" style="-fx-background-color: rgb(60, 171, 198);" styleClass="mainFxmlClass" stylesheets="@../../css/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.cd.ui.controller.PrincipalController">
     <children>
-        <FlowPane layoutX="186.0" layoutY="31.0" prefHeight="200.0" prefWidth="830.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <FlowPane columnHalignment="CENTER" layoutX="186.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="160.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
             <children>
                 <ImageView fitHeight="91.0" fitWidth="91.0" onMouseClicked="#irHome" pickOnBounds="true" preserveRatio="true">
                     <image>
@@ -40,8 +40,9 @@
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
-                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_impar" stylesheets="@../../css/main.css" text="Comdomínio" textAlignment="CENTER" textFill="WHITE">
+               </cursor>
+            </Button>
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_impar" stylesheets="@../../css/main.css" text="Condomínio" textAlignment="CENTER" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -54,8 +55,9 @@
                </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
-                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_par" stylesheets="@../../css/main.css" text="Condomino" textFill="WHITE">
+               </cursor>
+            </Button>
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_par" stylesheets="@../../css/main.css" text="Condômino" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -68,8 +70,9 @@
                </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
-                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_impar" stylesheets="@../../css/main.css" text="Dispesas" textFill="WHITE">
+               </cursor>
+            </Button>
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_impar" stylesheets="@../../css/main.css" text="Despesas" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
                </font>
@@ -82,7 +85,8 @@
                </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
+               </cursor>
+            </Button>
                 <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_par" stylesheets="@../../css/main.css" text="Relatorio" textFill="WHITE">
                <font>
                   <Font name="System Bold" size="16.0" />
@@ -90,27 +94,29 @@
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../img/relatorios_ico.png" />
+                        <Image url="@../../img/relatorio_ico.png" />
                      </image>
                   </ImageView>
                </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
-                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_impar" stylesheets="@../../css/main.css" text="Usuário" textFill="WHITE">
+               </cursor>
+            </Button>
+                <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_impar" stylesheets="@../../css/main.css" text="Documentos" textFill="WHITE">
                <font>
-                  <Font name="System Bold" size="16.0" />
+                  <Font name="System Bold" size="14.0" />
                </font>
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
                      <image>
-                        <Image url="@../../img/funcionario_ico.png" />
+                        <Image url="@../../img/documento_ico.png" />
                      </image>
                   </ImageView>
                </graphic>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
+               </cursor>
+            </Button>
                 <Button contentDisplay="TOP" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="160.0" prefWidth="120.0" styleClass="menu_botao_par" stylesheets="@../../css/main.css" text="Configurações" textFill="WHITE">
                <graphic>
                   <ImageView fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
@@ -124,28 +130,29 @@
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
-               </cursor></Button>
-                <ToolBar prefHeight="40.0" prefWidth="1024.0">
-                    <FlowPane.margin>
-                        <Insets />
-                    </FlowPane.margin>
-                    <items>
-                        <SplitMenuButton fx:id="user" mnemonicParsing="false" text="Usuário">
-                            <items>
-                                <MenuItem mnemonicParsing="false" onAction="#trocarDeUsuario" text="Trocar de usuário" />
-                                <MenuItem mnemonicParsing="false" onAction="#logoff" text="Sair" />
-                            </items>
-                        </SplitMenuButton>
-                    </items>
-                    <padding>
-                        <Insets left="850.0" />
-                    </padding>
-                </ToolBar>
+               </cursor>
+            </Button>
             </children>
         </FlowPane>
-        <StackPane fx:id="stack" layoutX="8.0" layoutY="199.0" prefHeight="569.0" prefWidth="1024.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="199.0">
+          <ToolBar layoutY="162.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="40.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="162.0">
+              <items>
+                  <SplitMenuButton fx:id="user" mnemonicParsing="false" text="Usuário">
+                      <items>
+                          <MenuItem mnemonicParsing="false" onAction="#trocarDeUsuario" text="Trocar de usuário" />
+                          <MenuItem mnemonicParsing="false" onAction="#logoff" text="Sair" />
+                      </items>
+               <padding>
+                  <Insets left="5.0" />
+               </padding>
+                  </SplitMenuButton>
+              </items>
+         <padding>
+            <Insets right="10.0" />
+         </padding>
+          </ToolBar>
+        <StackPane fx:id="stack" layoutX="8.0" layoutY="199.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="200.0">
          <children>
-            <Pane fx:id="home" prefHeight="200.0" prefWidth="200.0" style="-fx-background-color: #ffffff;">
+            <Pane fx:id="home" style="-fx-background-color: #ffffff;" StackPane.alignment="TOP_CENTER">
                <children>
                       <GridPane layoutX="230.0" layoutY="76.0" prefHeight="382.0" prefWidth="588.0">
                           <columnConstraints>
@@ -158,11 +165,11 @@
                               <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                           <children>
-                              <Button fx:id="funcionário" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Button fx:id="condomino" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                   <graphic>
                                       <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
                                           <image>
-                                              <Image url="@../../img/bt_funcionario.png" />
+                                              <Image url="@../../img/bt_morador.png" />
                                           </image>
                                       </ImageView>
                                   </graphic>
@@ -170,41 +177,56 @@
                               <Cursor fx:constant="HAND" />
                            </cursor>
                               </Button>
-                              <Button fx:id="pagamento" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.rowIndex="1">
+                              <Button fx:id="relatorio" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.rowIndex="1">
                                   <graphic>
-                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/bt_relatorios.png" />
+                                 </image></ImageView>
                                   </graphic>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                               </Button>
-                              <Button fx:id="estoque" layoutX="10.0" layoutY="275.0" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1">
+                              <Button fx:id="despesas" layoutX="10.0" layoutY="275.0" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="1">
                                   <graphic>
-                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/bt_despesas.png" />
+                                 </image></ImageView>
                                   </graphic>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                               </Button>
-                              <Button fx:id="cliente" layoutX="312.0" layoutY="275.0" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="2">
+                              <Button fx:id="condominio" layoutX="312.0" layoutY="275.0" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="2">
                                   <graphic>
-                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/bt_condominio.png" />
+                                 </image></ImageView>
                                   </graphic>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                               </Button>
-                              <Button fx:id="configurações" layoutX="312.0" layoutY="275.0" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="2" GridPane.rowIndex="1">
+                              <Button fx:id="documentos" layoutX="312.0" layoutY="275.0" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;" GridPane.columnIndex="2" GridPane.rowIndex="1">
                                   <graphic>
-                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/bt_documentos.png" />
+                                 </image></ImageView>
                                   </graphic>
                            <cursor>
                               <Cursor fx:constant="HAND" />
                            </cursor>
                               </Button>
-                              <Button fx:id="venda" graphicTextGap="0.0" layoutX="312.0" layoutY="275.0" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;">
+                              <Button fx:id="boleto" graphicTextGap="0.0" layoutX="312.0" layoutY="275.0" mnemonicParsing="false" onAction="#botaoMenu" prefHeight="180.0" prefWidth="180.0" style="-fx-background-color: #ffffff;">
                                   <graphic>
-                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true" />
+                                      <ImageView fitHeight="180.0" fitWidth="180.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@../../img/bt_boleto.png" />
+                                 </image></ImageView>
                                   </graphic>
                            <cursor>
                               <Cursor fx:constant="HAND" />
